@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
-require('dotenv').config()
-const db = process.env.MONGO_URI
+const mongoose = require("mongoose");
+require("dotenv").config();
+const db = process.env.MONGO_URI;
 
 const connectToDB = async () => {
   try {
@@ -9,12 +9,12 @@ const connectToDB = async () => {
       useCreateIndex: true,
       useFindAndModify: false,
       useUnifiedTopology: true,
-    })
-    console.log(`Successfully connected to Mongo ✅`)
+    });
+    console.log(`Successfully connected to Mongo ✅`);
   } catch (err) {
-    console.error(err.message)
-    process.exit(1)
+    console.error(err.message);
+    process.exit(1);
   }
-}
+};
 
-module.exports = connectToDB
+module.exports = connectToDB;
