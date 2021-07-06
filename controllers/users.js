@@ -1,5 +1,4 @@
 import User from "../models/user.js";
-import fastify from "fastify";
 
 /**
  *
@@ -13,7 +12,11 @@ export const getAllUsers = async (_, rep) => {
       all_users,
     });
   } catch (error) {
-    fastify.log.error(error);
+    // fastify.log.error(error);
+    rep.code(500).send({
+      status: "Unsuccessfull",
+      message: error.message,
+    });
   }
 };
 
@@ -30,7 +33,11 @@ export const getOneUser = async (req, rep) => {
       user,
     });
   } catch (error) {
-    fastify.log.error(error);
+    // fastify.log.error(error);
+    rep.code(500).send({
+      status: "Unsuccessfull",
+      message: error.message,
+    });
   }
 };
 
@@ -55,10 +62,12 @@ export const createUser = async (req, rep) => {
     const user = await newUser.save();
 
     rep.send(user);
-  } catch (e) {
+  } catch (error) {
     /* handle error */
-    console.error(e.message);
-    rep.status(500).send("Server Error");
+    rep.code(500).send({
+      status: "Unsuccessfull",
+      message: error.message,
+    });
   }
 };
 
@@ -84,7 +93,7 @@ export const updateUser = async (req, rep) => {
   try {
     let user = await User.findById(req.params.id);
 
-    if (!user) return res.status(404).json({ msg: "User not found" });
+    if (!user) return rep.code(404).json({ msg: "User not found" });
 
     user = await User.findByIdAndUpdate(
       req.params.id,
@@ -93,8 +102,10 @@ export const updateUser = async (req, rep) => {
     );
     rep.send(user);
   } catch (err) {
-    console.error(err.message);
-    rep.status(500).send("Server Error");
+    rep.code(500).send({
+      status: "Unsuccessfull",
+      message: error.message,
+    });
   }
 };
 
@@ -107,13 +118,15 @@ export const deleteUser = async (req, rep) => {
   try {
     let user = await User.findById(req.params.id);
 
-    if (!user) return rep.status(404).send({ message: "User not found" });
+    if (!user) return rep.code(404).send({ message: "User not found" });
 
     await User.findByIdAndRemove(req.params.id);
 
     rep.send({ msg: "User removed from DB" });
   } catch (err) {
-    console.error(err.message);
-    rep.status(500).send("Server Error");
+    rep.code(500).send({
+      status: "Unsuccessfull",
+      message: error.message,
+    });
   }
 };
