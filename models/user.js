@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const UserSchema = mongoose.Schema(
   {
@@ -24,10 +24,10 @@ const UserSchema = mongoose.Schema(
     },
     country: {
       type: String,
-      default: 'IN',
+      default: "IN",
     },
   },
   { timestamps: true }
-)
+);
 
-module.exports = mongoose.model('user', UserSchema)
+module.exports = mongoose.model("user", UserSchema);
