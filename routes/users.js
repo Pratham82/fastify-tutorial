@@ -1,10 +1,10 @@
-const {
+import {
   getAllUsers,
   getOneUser,
   createUser,
-  updateUser,
   deleteUser,
-} = require("../controllers/users.js");
+  updateUser,
+} from "../controllers/users.js";
 
 function userRoutes(fastify, options, done) {
   // Get all Users
@@ -20,4 +20,5 @@ function userRoutes(fastify, options, done) {
   done();
 }
 
-module.exports = userRoutes;
+// module.exports = userRoutes;
+export default userRoutes;

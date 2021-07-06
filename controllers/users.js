@@ -1,12 +1,12 @@
-const User = require("../models/user.js");
-const fastify = require("fastify");
+import User from "../models/user.js";
+import fastify from "fastify";
 
 /**
  *
  * @param {} req: empty
  * @param {Array} resp: list of all users
  */
-const getAllUsers = async (_, rep) => {
+export const getAllUsers = async (_, rep) => {
   try {
     const all_users = await User.find({});
     rep.send({
@@ -22,7 +22,7 @@ const getAllUsers = async (_, rep) => {
  * @param {id} req: user ID
  * @param {object} resp: details of the given user
  */
-const getOneUser = async (req, rep) => {
+export const getOneUser = async (req, rep) => {
   try {
     const user = await User.findById({ _id: req.params.id });
     if (!user) return rep.send({ message: "User not found" });
@@ -39,7 +39,7 @@ const getOneUser = async (req, rep) => {
  * @param {object} req: user object
  * @param {object} resp: details of the given user
  */
-const createUser = async (req, rep) => {
+export const createUser = async (req, rep) => {
   const { name, email, phone, city, state, country } = req.body;
 
   try {
@@ -67,7 +67,7 @@ const createUser = async (req, rep) => {
  * @param {object} req: user object to be updated
  * @param {object} resp: updated user
  */
-const updateUser = async (req, rep) => {
+export const updateUser = async (req, rep) => {
   const { name, email, phone, city, state, country, area } = req.body;
 
   // Building user in case values not provided
@@ -103,7 +103,7 @@ const updateUser = async (req, rep) => {
  * @param {id} req: user id to be deleted
  * @param {object} resp: result will be sent as message of delete operation
  */
-const deleteUser = async (req, rep) => {
+export const deleteUser = async (req, rep) => {
   try {
     let user = await User.findById(req.params.id);
 
@@ -116,12 +116,4 @@ const deleteUser = async (req, rep) => {
     console.error(err.message);
     rep.status(500).send("Server Error");
   }
-};
-
-module.exports = {
-  getAllUsers,
-  getOneUser,
-  createUser,
-  updateUser,
-  deleteUser,
 };
