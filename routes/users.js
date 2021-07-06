@@ -1,16 +1,23 @@
-const {getAllUsers} = require('../controllers/users.js')
+const {
+  getAllUsers,
+  getOneUser,
+  createUser,
+  updateUser,
+  deleteUser,
+} = require("../controllers/users.js");
 
-
-function userRoutes (fastify, options,done) {
+function userRoutes(fastify, options, done) {
   // Get all Users
-  fastify.get('/api/users', getAllUsers)
-
-  //*TODO 
+  fastify.get("/api/users", getAllUsers);
   // Get one User
+  fastify.get("/api/users/:id", getOneUser);
   // Add User
+  fastify.post("/api/users", createUser);
   // Delete User
+  fastify.delete("/api/users/:id", deleteUser);
   // Update User
-  done()
+  fastify.put("/api/users/:id", updateUser);
+  done();
 }
 
-module.exports = userRoutes
+module.exports = userRoutes;
