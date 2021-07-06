@@ -2,22 +2,25 @@
   "name": "fastify-crud-api",
   "version": "1.0.0",
   "description": "CRUD API with Fastify",
-  "type":"module",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "pretty-logs": "fastify start -w -l info -P app.js"
   },
   "author": "Prathamesh Mali",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^10.0.0",
     "fastify": "^3.18.1",
+    "fastify-autoload": "^3.8.0",
     "fastify-swagger": "^4.8.2",
     "mongoose": "^5.13.2",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "fastify-cli": "^2.13.0",
     "nodemon": "^2.0.9"
   }
 }

@@ -8,6 +8,13 @@ npm i
 ```
 
 ### Running the application in dev mode
+
+With fastify-start
+```
+npm run pretty-logs
+```
+
+Without fastify-start
 ```
 npm run dev
 ```
